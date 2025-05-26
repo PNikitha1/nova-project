@@ -1,0 +1,6 @@
+How to run cmake:
+
+>>>cmake -Bbuild
+>>>cmake --build build
+>>>../build/runTests (based on cmakefile file)
+
