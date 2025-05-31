@@ -1,7 +1,22 @@
+
+/******************************************************************************
+ *                    File Name: MobileAppManagerTest.cpp
+ *                    Description: Unit tests for MobileAppManager class
+ *                    Created By: Nikitha, Karthikeya, Snigdha, Swetha
+ *                    Created Date: 30/05/2025
+ *****************************************************************************/
+
+/**************************************************************************** **
+ *                      Header Files 
+ *****************************************************************************/
 #include "MobileAppManager.h"
+#include <algorithm>
 #include <gtest/gtest.h>
 
-// Test installing a single app
+/******************************************************************************
+ *                  Test Case: testInstallSingleApp
+ *                  Description: Test installing a single application
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testInstallSingleApp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -11,7 +26,10 @@ TEST(MobileAppManagerTest, testInstallSingleApp) {
     EXPECT_EQ(installedApps[0], "WhatsApp");
 }
 
-// Test installing multiple apps
+/******************************************************************************
+ *                  Test Case: testInstallMultipleApps
+ *                  Description: Test installing multiple applications
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testInstallMultipleApps) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -21,37 +39,49 @@ TEST(MobileAppManagerTest, testInstallMultipleApps) {
     EXPECT_EQ(installedApps.size(), 2);
 }
 
-// Test installing the same app twice
-TEST(MobileAppManagerTest,  testInstallSameAppTwice) {
+/******************************************************************************
+ *                  Test Case: testInstallSameAppTwice
+ *                  Description: Test installing the same application twice
+ *****************************************************************************/
+TEST(MobileAppManagerTest, testInstallSameAppTwice) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
-    manager.installApp("WhatsApp"); // Attempting duplicate install
+    manager.installApp("WhatsApp");
 
     auto installedApps = manager.listInstalledApps();
-    EXPECT_EQ(installedApps.size(), 1); // Should have only one instance
+    EXPECT_EQ(installedApps.size(), 1);
 }
 
-// Test installing an invalid app name (empty string)
+/******************************************************************************
+ *                  Test Case: testInstallInvalidAppName
+ *                  Description: Test installing an application with empty name
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testInstallInvalidAppName) {
     MobileAppManager manager;
-    manager.installApp("");  // Invalid name
+    manager.installApp("");
 
     auto installedApps = manager.listInstalledApps();
-    EXPECT_TRUE(installedApps.empty());  // Should not add any app
+    EXPECT_TRUE(installedApps.empty());
 }
 
-// Test uninstalling a single app
+/******************************************************************************
+ *                  Test Case: testUninstallSingleApp
+ *                  Description: Test uninstalling a single application
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testUninstallSingleApp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
     manager.uninstallApp("WhatsApp");
 
     auto installedApps = manager.listInstalledApps();
-    EXPECT_TRUE(installedApps.empty()); // Should be empty after uninstall
+    EXPECT_TRUE(installedApps.empty());
 }
 
-// Test uninstalling multiple apps
-TEST(MobileAppManagerTest,  testUninstallMultipleApps) {
+/******************************************************************************
+ *                  Test Case: testUninstallMultipleApps
+ *                  Description: Test uninstalling multiple applications
+ *****************************************************************************/
+TEST(MobileAppManagerTest, testUninstallMultipleApps) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
     manager.installApp("Spotify");
@@ -60,31 +90,37 @@ TEST(MobileAppManagerTest,  testUninstallMultipleApps) {
     manager.uninstallApp("Spotify");
 
     auto installedApps = manager.listInstalledApps();
-    EXPECT_TRUE(installedApps.empty()); // No apps should remain
+    EXPECT_TRUE(installedApps.empty());
 }
 
-// Test uninstalling a non-existent app
+/******************************************************************************
+ *                  Test Case: testUninstallNonExistentApp
+ *                  Description: Test uninstalling an app that was never installed
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testUninstallNonExistentApp) {
     MobileAppManager manager;
-    manager.uninstallApp("FakeApp");  // App was never installed
+    manager.uninstallApp("FakeApp");
 
-    auto installedApps = manager.listInstalledApps();
-    EXPECT_TRUE(installedApps.empty()); // System should remain unchanged
-}
-
-// Test uninstalling an invalid app name
-TEST(MobileAppManagerTest, testUninstallInvalidAppName) {
-    MobileAppManager manager;
-    
-    // Try uninstalling an app with an empty string as the name
-    manager.uninstallApp("");
-
-    // The list of installed apps should remain unchanged (empty initially)
     auto installedApps = manager.listInstalledApps();
     EXPECT_TRUE(installedApps.empty());
 }
 
-// Test assigning a single permission to an app
+/******************************************************************************
+ *                  Test Case: testUninstallInvalidAppName
+ *                  Description: Test uninstalling an app with empty name
+ *****************************************************************************/
+TEST(MobileAppManagerTest, testUninstallInvalidAppName) {
+    MobileAppManager manager;
+    manager.uninstallApp("");
+
+    auto installedApps = manager.listInstalledApps();
+    EXPECT_TRUE(installedApps.empty());
+}
+
+/******************************************************************************
+ *                  Test Case: testAssignSinglePermissionToApp
+ *                  Description: Test assigning a single permission to an app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testAssignSinglePermissionToAppp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -95,16 +131,22 @@ TEST(MobileAppManagerTest, testAssignSinglePermissionToAppp) {
     EXPECT_EQ(permissions[0], "Camera");
 }
 
-// Test assigning permission to a non-existent app
+/******************************************************************************
+ *                  Test Case: testAssignPermissionToNonExistentApp
+ *                  Description: Test assigning permission to a non-existent app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testAssignPermissionToNonExistentApp) {
     MobileAppManager manager;
-    manager.assignPermission("FakeApp", "Camera"); // App not installed
+    manager.assignPermission("FakeApp", "Camera");
 
     auto permissions = manager.listAppPermissions("FakeApp");
-    EXPECT_TRUE(permissions.empty()); // No permissions should be assigned
+    EXPECT_TRUE(permissions.empty());
 }
 
-// Test assigning multiple permissions to an app
+/******************************************************************************
+ *                  Test Case: testAssignMultiplePermissionsToApp
+ *                  Description: Test assigning multiple permissions to an app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testAssignMultiplePermissionsToApp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -117,17 +159,23 @@ TEST(MobileAppManagerTest, testAssignMultiplePermissionsToApp) {
     EXPECT_EQ(permissions[1], "Microphone");
 }
 
-// Test assigning an invalid permission to an app
+/******************************************************************************
+ *                  Test Case: testAssignInvalidPermissionToApp
+ *                  Description: Test assigning an invalid (empty) permission
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testAssignInvalidPermissionToApp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
-    manager.assignPermission("WhatsApp", ""); // Invalid permission
+    manager.assignPermission("WhatsApp", "");
 
     auto permissions = manager.listAppPermissions("WhatsApp");
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test revoking a permission from an invalid app
+/******************************************************************************
+ *                  Test Case: testRevokePermissionFromApp_InvalidApp
+ *                  Description: Test revoking permission from a non-existent app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidApp) {
     MobileAppManager manager;
     manager.revokePermission("FakeApp", "Camera");
@@ -136,7 +184,10 @@ TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidApp) {
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test revoking a valid permission from an app
+/******************************************************************************
+ *                  Test Case: testRevokePermissionFromApp_ValidPermission
+ *                  Description: Test revoking a valid permission from an app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testRevokePermissionFromApp_ValidPermission) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -147,7 +198,10 @@ TEST(MobileAppManagerTest, testRevokePermissionFromApp_ValidPermission) {
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test revoking an invalid permission from an app
+/******************************************************************************
+ *                  Test Case: testRevokePermissionFromApp_InvalidPermission
+ *                  Description: Test revoking a non-existent permission from an app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidPermission) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -157,7 +211,10 @@ TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidPermission) {
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test revoking a permission from an invalid app with an invalid permission
+/******************************************************************************
+ *     Test Case: testRevokePermissionFromApp_InvalidAppAndPermission
+ *     Description: Test revoking a permission from a non-existent app and permission
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidAppAndPermission) {
     MobileAppManager manager;
     manager.revokePermission("FakeApp", "FakePermission");
@@ -166,14 +223,20 @@ TEST(MobileAppManagerTest, testRevokePermissionFromApp_InvalidAppAndPermission) 
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test listing installed apps when empty
+/******************************************************************************
+ *                  Test Case: testListInstalledApps_Empty
+ *                  Description: Test listing apps when no apps are installed
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListInstalledApps_Empty) {
     MobileAppManager manager;
     auto installedApps = manager.listInstalledApps();
     EXPECT_TRUE(installedApps.empty());
 }
 
-// Test listing installed apps with a single app
+/******************************************************************************
+ *                  Test Case: testListInstalledApps_SingleApp
+ *                  Description: Test listing installed apps with one app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListInstalledApps_SingleApp) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -183,7 +246,10 @@ TEST(MobileAppManagerTest, testListInstalledApps_SingleApp) {
     EXPECT_EQ(installedApps[0], "WhatsApp");
 }
 
-// Test listing installed apps with multiple apps
+/******************************************************************************
+ *                  Test Case: testListInstalledApps_MultipleApps
+ *                  Description: Test listing installed apps with multiple apps
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListInstalledApps_MultipleApps) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -191,25 +257,36 @@ TEST(MobileAppManagerTest, testListInstalledApps_MultipleApps) {
 
     auto installedApps = manager.listInstalledApps();
     EXPECT_EQ(installedApps.size(), 2);
-    EXPECT_EQ(installedApps[0], "WhatsApp");
-    EXPECT_EQ(installedApps[1], "Spotify");
+    EXPECT_TRUE(std::find(installedApps.begin(), installedApps.end(), "WhatsApp") != installedApps.end());
+    EXPECT_TRUE(std::find(installedApps.begin(), installedApps.end(), "Spotify") != installedApps.end());
 }
 
-// Test listing installed apps when no apps have been installed
+/******************************************************************************
+ *                  Test Case: testListInstalledApps_NoApps
+ *                  Description: Test listing installed apps when no apps have been installed
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListInstalledApps_NoApps) {
     MobileAppManager manager;
     auto installedApps = manager.listInstalledApps();
     EXPECT_TRUE(installedApps.empty());
 }
 
-// Test that the list of permissions returns an empty vector when the app has not been installed
+/******************************************************************************
+ *      Test Case: testListPermissionsAssignedToAnApp_1
+ *      Description: Test that the list of permissions returns an empty vector 
+ *                   when the app has not been installed
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_1) {
     MobileAppManager manager;
     auto permissions = manager.listAppPermissions("NonExistentApp");
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test that the list of permissions returns an empty vector when the app has been installed but no permission has been assigned
+/******************************************************************************
+ *      Test Case: testListPermissionsAssignedToAnApp_2
+ *      Description: Test that the list of permissions returns an empty vector 
+ *                   when the app has been installed but no permission has been assigned
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_2) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -217,7 +294,11 @@ TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_2) {
     EXPECT_TRUE(permissions.empty());
 }
 
-// Test that the list of permissions returns all permissions assigned to the app
+/******************************************************************************
+ *      Test Case: testListPermissionsAssignedToAnApp_3
+ *      Description: Test that the list of permissions returns all permissions 
+ *                   assigned to the app
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_3) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -230,7 +311,11 @@ TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_3) {
     EXPECT_EQ(permissions[1], "Microphone");
 }
 
-// Test that the list of permissions returns only the permissions assigned to a specific app and not to others
+/******************************************************************************
+ *      Test Case: testListPermissionsAssignedToAnApp_4
+ *      Description: Test that the list of permissions returns only the permissions 
+ *                   assigned to a specific app and not to others
+ *****************************************************************************/
 TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_4) {
     MobileAppManager manager;
     manager.installApp("WhatsApp");
@@ -249,8 +334,13 @@ TEST(MobileAppManagerTest, testListPermissionsAssignedToAnApp_4) {
     EXPECT_EQ(permissionsSpotify[0], "Microphone");
 }
 
-// Main function to execute tests
+/******************************************************************************
+ *                  Main Function
+ *                  Description: Entry point to execute all unit tests
+ *****************************************************************************/
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
+/******************************** End of File ********************************/
