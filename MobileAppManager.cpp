@@ -1,7 +1,28 @@
+
+/******************************************************************************
+ *                    File Name: MobileAppManager.cpp
+ *                    Description: Implementation file for managing mobile apps and their permissions
+ *                    Created By: Nikitha, Karthikeya, Snigdha, Swetha
+ *                    Created Date: 30/05/2025
+ *****************************************************************************/
+
+/**************************************************************************** **
+ *                      Header Files 
+ *****************************************************************************/
 #include "MobileAppManager.h"
 #include <iostream>
 
+/******************************************************************************
+ *                  Name: installApp
+ *                  Description: Installs a new application with the given name
+ *                  Arguments: const std::string& appName - Name of the application
+ *                  Returns: None
+ *****************************************************************************/
 void MobileAppManager::installApp(const std::string& appName) {
+    if(appName.empty()){
+        std::cout << "Invalid app name!" << std::endl;
+        return; 
+    }
     if (installedApps.find(appName) == installedApps.end()) {
         installedApps[appName] = new App(appName);
         std::cout << "App installed: " << appName << std::endl;
@@ -10,6 +31,12 @@ void MobileAppManager::installApp(const std::string& appName) {
     }
 }
 
+/******************************************************************************
+ *                  Name: uninstallApp
+ *                  Description: Uninstalls the application with the given name
+ *                  Arguments: const std::string& appName - Name of the application
+ *                  Returns: None
+ *****************************************************************************/
 void MobileAppManager::uninstallApp(const std::string& appName) {
     auto it = installedApps.find(appName);
     if (it != installedApps.end()) {
@@ -21,7 +48,18 @@ void MobileAppManager::uninstallApp(const std::string& appName) {
     }
 }
 
+/******************************************************************************
+ *                  Name: assignPermission
+ *                  Description: Assigns a permission to a given application
+ *                  Arguments: const std::string& appName - Name of the application
+ *                             const std::string& permission - Permission to assign
+ *                  Returns: None
+ *****************************************************************************/
 void MobileAppManager::assignPermission(const std::string& appName, const std::string& permission) {
+    if(permission.empty()){
+        std::cout << "Invalid permission!" << std::endl;
+        return;
+    }
     auto it = installedApps.find(appName);
     if (it != installedApps.end()) {
         it->second->addPermission(permission);
@@ -31,6 +69,13 @@ void MobileAppManager::assignPermission(const std::string& appName, const std::s
     }
 }
 
+/******************************************************************************
+ *                  Name: revokePermission
+ *                  Description: Revokes a permission from the given application
+ *                  Arguments: const std::string& appName - Name of the application
+ *                             const std::string& permission - Permission to revoke
+ *                  Returns: None
+ *****************************************************************************/
 void MobileAppManager::revokePermission(const std::string& appName, const std::string& permission) {
     auto it = installedApps.find(appName);
     if (it != installedApps.end()) {
@@ -41,6 +86,12 @@ void MobileAppManager::revokePermission(const std::string& appName, const std::s
     }
 }
 
+/******************************************************************************
+ *                  Name: listInstalledApps
+ *                  Description: Lists all installed applications
+ *                  Arguments: None
+ *                  Returns: std::vector<std::string> - List of app names
+ *****************************************************************************/
 std::vector<std::string> MobileAppManager::listInstalledApps() const {
     std::vector<std::string> appNames;
     for (const auto& pair : installedApps) {
@@ -49,6 +100,12 @@ std::vector<std::string> MobileAppManager::listInstalledApps() const {
     return appNames;
 }
 
+/******************************************************************************
+ *                  Name: listAppPermissions
+ *                  Description: Lists permissions of a given application
+ *                  Arguments: const std::string& appName - Name of the application
+ *                  Returns: std::vector<std::string> - List of permissions
+ *****************************************************************************/
 std::vector<std::string> MobileAppManager::listAppPermissions(const std::string& appName) const {
     auto it = installedApps.find(appName);
     if (it != installedApps.end()) {
@@ -56,3 +113,5 @@ std::vector<std::string> MobileAppManager::listAppPermissions(const std::string&
     }
     return {};
 }
+
+/******************************** End of File ********************************/
