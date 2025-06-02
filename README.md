@@ -12,7 +12,7 @@ A C++-based simulation of a mobile app management system that allows users to:
 ---
 
 ## 📂 Project Structure
-MobileAppManagementSystem_project/
+nova-project/
 ├── App.h / App.cpp # App class: name + permissions
 ├── MobileAppManager.h / .cpp # Manager class: handles multiple apps
 ├── Tests.cpp # 24 unit tests using Google Test
