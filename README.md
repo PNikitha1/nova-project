@@ -68,8 +68,8 @@ nova-project/
 ## Test Results:
 > Below are the final outputs of test execution:
 ### ✅ All Tests Passed (Screenshot) url's:
-https://github.com/PNikitha1/nova-project/blob/main/projectresults1.png?
-https://github.com/PNikitha1/nova-project/blob/main/projectresults2.png?
+https://github.com/PNikitha1/nova-project/blob/main/projectresults1.png
+https://github.com/PNikitha1/nova-project/blob/main/projectresults2.png
 
 ---
 
