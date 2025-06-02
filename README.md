@@ -34,7 +34,7 @@ nova-project/
 
 ---
 
-##Technologies Used
+## Technologies Used
 
 | Tool             | Purpose                        |
 |------------------|---------------------------------|
@@ -53,25 +53,25 @@ nova-project/
 - Invalid/unregistered permissions  
 - Empty input handling  
 - Permission logic by app
-
-## 🧪 Testing (Google Test)
-
-✅ **24 test cases**  
-✅ Covers all edge cases:
-- Duplicate app names
-- Invalid/unregistered permissions
-- Empty input handling
-- Permission logic by app
-
-Run tests commands:
+  
 ---
-** bash
-cmake -Bbuild
-cmake --build build
-./build/runTests        # Linux/macOS
-.\build\runTests.exe    # Windows
 
+## Run tests commands:
+>> bash
+     cmake -Bbuild
+     cmake --build build
+    ./build/runTests        # Linux/macOS
+    .\build\runTests.exe    # Windows
 
+---
+
+## Test Results:
+> Below are the final outputs of test execution:
+### ✅ All Tests Passed (Screenshot) url's:
+https://github.com/PNikitha1/nova-project/blob/main/projectresults1.png?
+https://github.com/PNikitha1/nova-project/blob/main/projectresults2.png?
+
+---
 
 
 
