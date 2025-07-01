@@ -1,0 +1,5 @@
+/mnt/d/cpp files/Mobile App Management System/build/CMakeFiles/MobileAppManagerLib.dir
+/mnt/d/cpp files/Mobile App Management System/build/CMakeFiles/runTests.dir
+/mnt/d/cpp files/Mobile App Management System/build/CMakeFiles/test.dir
+/mnt/d/cpp files/Mobile App Management System/build/CMakeFiles/edit_cache.dir
+/mnt/d/cpp files/Mobile App Management System/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMobileAppManagerLib.a CMakeFiles/MobileAppManagerLib.dir/App.cpp.o CMakeFiles/MobileAppManagerLib.dir/MobileAppManager.cpp.o
+/usr/bin/ranlib libMobileAppManagerLib.a
