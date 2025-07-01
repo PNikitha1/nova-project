@@ -4,3 +4,10 @@ How to run cmake:
 >>>cmake --build build
 >>>./build/runTests (based on cmakefile file)
 
+Another Way
+1. install cmake -- sudo apt install cmake
+2. mkdir build
+3. cd build
+4. cmake ..
+5. cmake --build . (or) make
+6. ./runTests(based on cmakefile executable file)
